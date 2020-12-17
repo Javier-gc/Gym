@@ -24,7 +24,7 @@
             this.personalTableAdapter.Fill(this.dsPersonal.Personal);
             EstablecerEstado(false);
 
-            lblidRegistro.Text = Convert.ToString(registroCache.idRegistro + 1);
+            lblidRegistro.Text = Convert.ToString(userCache.userID);
         }
 
         private void EstablecerEstado(bool v)
@@ -63,7 +63,6 @@
             txtTelefono.Text = String.Empty;
             txtCorreo.Text = String.Empty;
             txtPuesto.Text = String.Empty;
-            txtIDregistro.Text = String.Empty;
         }
 
         private void ToolStripModificar_Click(object sender, EventArgs e)
@@ -90,7 +89,6 @@
             txtTelefono.Text = dgPersonal[5, dgPersonal.CurrentRow.Index].Value.ToString();
             txtCorreo.Text = dgPersonal[6, dgPersonal.CurrentRow.Index].Value.ToString();
             txtPuesto.Text = dgPersonal[7, dgPersonal.CurrentRow.Index].Value.ToString();
-            txtIDregistro.Text = dgPersonal[8, dgPersonal.CurrentRow.Index].Value.ToString();
 
         }
 
@@ -109,6 +107,41 @@
                 return;
             }
 
+            if (txtApellido.Text.Trim() == String.Empty)
+            {
+                MessageBox.Show("Debes de introducir un Apellido", "Warning", MessageBoxButtons.OK);
+                txtApellido.Focus();
+                return;
+            }
+
+            if (txtEdad.Text.Trim() == String.Empty)
+            {
+                MessageBox.Show("Debes de introducir un Edad", "Warning", MessageBoxButtons.OK);
+                txtEdad.Focus();
+                return;
+            }
+
+            if (txtDireccion.Text.Trim() == String.Empty)
+            {
+                MessageBox.Show("Debes de introducir una dirección", "Warning", MessageBoxButtons.OK);
+                txtDireccion.Focus();
+                return;
+            }
+
+            if (txtTelefono.Text.Trim() == String.Empty)
+            {
+                MessageBox.Show("Debes de introducir un telefono", "Warning", MessageBoxButtons.OK);
+                txtTelefono.Focus();
+                return;
+            }
+
+            if (ComprobarFormatoEmail(txtCorreo.Text) == false)
+            {
+                MessageBox.Show("Debes de introducir un Correo Valido", "Warning", MessageBoxButtons.OK);
+                txtCorreo.Focus();
+                return;
+            }
+
             if (txtPuesto.Text.Trim() == String.Empty)
             {
                 MessageBox.Show("Debes de introducir un puesto", "Warning", MessageBoxButtons.OK);
@@ -116,10 +149,12 @@
                 return;
             }
 
+
+
             if (PageAction == "ADD")
             {
                 UsuarioModel usuarioModel = new UsuarioModel();
-                usuarioModel.InsertarPersonal(txtNombre.Text, txtApellido.Text, Convert.ToInt32(txtEdad.Text), txtDireccion.Text, txtTelefono.Text, txtCorreo.Text, txtPuesto.Text, Convert.ToInt32(txtIDregistro.Text));
+                usuarioModel.InsertarPersonal(txtNombre.Text, txtApellido.Text, Convert.ToInt32(txtEdad.Text), txtDireccion.Text, txtTelefono.Text, txtCorreo.Text, txtPuesto.Text, Convert.ToInt32(userCache.userID));
                 this.personalTableAdapter.Fill(this.dsPersonal.Personal);
                 EstablecerEstado(false);
             }
@@ -138,7 +173,7 @@
                     ID = int.Parse(dgPersonal[0, dgPersonal.CurrentRow.Index].Value.ToString());
 
                     UsuarioModel usuarioModel = new UsuarioModel();
-                    usuarioModel.EditarPersonal(ID, txtNombre.Text, txtApellido.Text, Convert.ToInt32(txtEdad.Text), txtDireccion.Text, txtTelefono.Text, txtCorreo.Text, txtPuesto.Text, Convert.ToInt32(txtIDregistro.Text));
+                    usuarioModel.EditarPersonal(ID, txtNombre.Text, txtApellido.Text, Convert.ToInt32(txtEdad.Text), txtDireccion.Text, txtTelefono.Text, txtCorreo.Text, txtPuesto.Text, Convert.ToInt32(userCache.userID));
                     this.personalTableAdapter.Fill(this.dsPersonal.Personal);
                     EstablecerEstado(false);
                 }
@@ -185,13 +220,30 @@
             }
         }
 
-        private void txtIDregistro_TextChanged(object sender, EventArgs e)
+        public static bool ComprobarFormatoEmail(string email)
         {
-            if (System.Text.RegularExpressions.Regex.IsMatch(txtIDregistro.Text, "[^0-9]"))
+            String sFormato;
+            sFormato = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+            if (System.Text.RegularExpressions.Regex.IsMatch(email, sFormato))
             {
-                MessageBox.Show("Ingresa solo números");
-                txtIDregistro.Text = txtIDregistro.Text.Remove(txtIDregistro.Text.Length - 1);
+                if (System.Text.RegularExpressions.Regex.Replace(email, sFormato, String.Empty).Length == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
+            else
+            {
+                return false;
+            }
+        }
+
+        private void lblidRegistro_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

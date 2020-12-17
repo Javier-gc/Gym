@@ -61,14 +61,6 @@ create table Clases(
 	constraint fk_idRegistroC foreign key (idRegistro) references Registro(idRegistro)
 )
 
-create table Detalles(
-
-	idDetalles int,
-	idClases int,
-
-	constraint pk_idDetalles primary key (idDetalles),
-	constraint fk_idClases foreign key (idClases) references Clases(idClases)
-)
 
 create table Cliente(
 
@@ -79,14 +71,14 @@ create table Cliente(
 	Direccion nvarchar(70),
 	Telefono nvarchar(20),
 	Correo nvarchar(70),
-	idDetalles int,
+	idClases int,
 	
 	constraint pk_idCliente primary key (idCliente),
-	constraint fk_idDetalle foreign key (idDetalles) references Detalles(idDetalles)
+	constraint fk_idClases foreign key (idClases) references Clases(idClases)
 )
 
 
-insert into Usuario VALUES ('1','001','francisco','1234567')
+insert into Usuario VALUES ('1','1','francisco','1234567')
 insert into Registro VALUES ('1','1')
 insert into Personal VALUES ('1','francisco','Ortiz','21','Direccion','1234567','frO@gmail.com','Dueño','1')
 insert into Personal VALUES ('2','Emmanuel','Barajas','21','Direccion2','1234567','EmB@gmail.com','Gerente','1')
@@ -94,8 +86,18 @@ insert into Personal VALUES ('3','Robert','Cruz','21','Direccion3','1234567','Ro
 insert into Material VALUES ('1','Ketter Bell','1','12','1')
 insert into Material VALUES ('2','Box','2','12','1')
 insert into Clases VALUES ('1','Lunes','8:00 PM','9:00 PM','1')
-insert into Clases VALUES ('2','Lunes','7:00 PM','8:00 PM','1')
-insert into Detalles VALUES ('1','0001')
+
+
 insert into Cliente VALUES ('1','Geli','Olmedo','24','Direccion2','123456789','geo@gmail.com','1')
 insert into Cliente VALUES ('2','Marco','Ramirez','27','Direccion1','123456789','MaR@gmail.com','1')
+insert into Usuario VALUES ('2','2','ivan','10');
 
+insert into Usuario VALUES ('3','3','admin','admin');
+insert into Registro VALUES ('2','2');
+insert into Registro VALUES ('3','3');
+insert into Clases VALUES ('0','Sin asignar','Sin horario','Sin horario','1');
+
+
+drop database CF_BOX_Final;
+
+use master;

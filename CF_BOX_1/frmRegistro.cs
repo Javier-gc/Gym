@@ -55,7 +55,7 @@
         {
             lblUser.Text = userCache.loginName;
             lblID.Text = userCache.userID;
-            lbIDRegistro.Text = Convert.ToString(registroCache.idRegistro);
+            lbIDRegistro.Text = Convert.ToString(userCache.userID) ;
         }
     }
 }

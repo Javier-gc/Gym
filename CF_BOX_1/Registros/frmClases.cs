@@ -21,7 +21,7 @@
 
             EstablecerEstado(false);
 
-            lblidRegistro.Text = Convert.ToString(registroCache.idRegistro + 1);
+            lblidRegistro.Text = Convert.ToString(userCache.userID);
         }
 
         private void EstablecerEstado(bool v)
@@ -63,7 +63,6 @@
             txtDia.Text = String.Empty;
             txtHoraFin.Text = String.Empty;
             txtHoraInicio.Text = String.Empty;
-            txtIDregistro.Text = String.Empty;
             txtBusqueda.Text = String.Empty;
         }
 
@@ -87,7 +86,7 @@
             txtDia.Text = dgClases[1, dgClases.CurrentRow.Index].Value.ToString();
             txtHoraInicio.Text = dgClases[2, dgClases.CurrentRow.Index].Value.ToString();
             txtHoraFin.Text = dgClases[3, dgClases.CurrentRow.Index].Value.ToString();
-            txtIDregistro.Text = dgClases[4, dgClases.CurrentRow.Index].Value.ToString();
+          
         }
 
         private void ToolStripCancelar_Click(object sender, EventArgs e)
@@ -112,18 +111,27 @@
                 return;
             }
 
+            if (txtHoraFin.Text.Trim() == String.Empty)
+            {
+                MessageBox.Show("Debes de introducir una hora de finalización", "Warning", MessageBoxButtons.OK);
+                txtHoraInicio.Focus();
+                return;
+            }
+
             if (PageAction == "ADD")
             {
-                UsuarioModel usuarioModel = new UsuarioModel();
-                usuarioModel.InsertarClases(txtDia.Text, txtHoraInicio.Text, txtHoraFin.Text, Convert.ToInt32(txtIDregistro.Text) );
+               
+                   UsuarioModel usuarioModel = new UsuarioModel();
+                usuarioModel.InsertarClases(txtDia.Text, txtHoraInicio.Text, txtHoraFin.Text, Convert.ToInt32(userCache.userID));
                 this.clasesTableAdapter.Fill(this.dsClases.Clases);
+
                 EstablecerEstado(false);
             }
             else
             {
                 if (PageAction == "EDIT")
                 {
-                    if (int.Parse(dgClases[0, dgClases.CurrentRow.Index].Value.ToString()) == 1)
+                    if (int.Parse(dgClases[0, dgClases.CurrentRow.Index].Value.ToString()) == 0)
                     {
                         MessageBox.Show("Está clase no se puede editar", "Warning", MessageBoxButtons.OK);
                         ClearField();
@@ -134,7 +142,7 @@
                     ID = int.Parse(dgClases[0, dgClases.CurrentRow.Index].Value.ToString());
 
                     UsuarioModel usuarioModel = new UsuarioModel();
-                    usuarioModel.EditarClases(ID, txtDia.Text, txtHoraInicio.Text, txtHoraFin.Text, Convert.ToInt32(txtIDregistro.Text));
+                    usuarioModel.EditarClases(ID, txtDia.Text, txtHoraInicio.Text, txtHoraFin.Text, Convert.ToInt32(userCache.userID));
                     this.clasesTableAdapter.Fill(this.dsClases.Clases);
                     EstablecerEstado(false);
                 }
@@ -144,7 +152,7 @@
         private void ToolStripBorrar_Click(object sender, EventArgs e)
         {
             int id = int.Parse(dgClases[0, dgClases.CurrentRow.Index].Value.ToString());
-            if (id == 1)
+            if (id == 0)
             {
                 MessageBox.Show("No se puede borrar está clase", "Warning", MessageBoxButtons.OK);
                 ClearField();
@@ -168,13 +176,6 @@
             form.ShowDialog();
         }
 
-        private void txtIDregistro_TextChanged(object sender, EventArgs e)
-        {
-            if (System.Text.RegularExpressions.Regex.IsMatch(txtIDregistro.Text, "[^0-9]"))
-            {
-                MessageBox.Show("Ingresa solo números");
-                txtIDregistro.Text = txtIDregistro.Text.Remove(txtIDregistro.Text.Length - 1);
-            }
-        }
+    
     }
 }

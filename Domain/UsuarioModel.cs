@@ -2,6 +2,8 @@
 {
     using DataAccess;
     using Common.Cache;
+    using System;
+  
 
     public class UsuarioModel
     {
@@ -11,6 +13,11 @@
         public bool LoginUser(string user, string pass)
         {
             return userDao.Login(user, pass);
+        }
+
+        public bool clases(string idclases)
+        {
+            return userDao.clases(idclases);
         }
 
         public void InsertarPersonal(string Nombre, string Apellido, int Edad, string Direccion, string Telefono, string correo, string puesto, int idRegistro)
@@ -36,6 +43,7 @@
         {
             int Id;
             Id = persistencia.SiguienteID("Material", "idMaterial");
+            idRegistro = Convert.ToInt32(userCache.userID);
             userDao.InsertarMaterial(Id, Nombre, Cantidad, stock, idRegistro);
         }
 
@@ -55,8 +63,11 @@
         {
             int Id;
             Id = persistencia.SiguienteID("Clases", "idClases");
+            idRegistro = Convert.ToInt32(userCache.userID);
             userDao.InsertarClases(Id, Dia, HoraInicio, HoraFinaliza, idRegistro);
         }
+
+ 
 
         public void EditarClases(int idClases, string Dia, string HoraInicio, string HoraFinaliza, int idRegistro)
         {
@@ -70,16 +81,16 @@
 
         ///////////////////   CLIENTES    //////////////////////
 
-        public void InsertarCliente(string Nombre, string Apellido, int Edad, string Direccion, string Telefono, string correo, int idDetalles)
+        public void InsertarCliente(string Nombre, string Apellido, int Edad, string Direccion, string Telefono, string correo, int idClases)
         {
             int Id;
             Id = persistencia.SiguienteID("Cliente", "idCliente");
-            userDao.InsertarCliente(Id, Nombre, Apellido, Edad, Direccion, Telefono, correo, idDetalles);
+            userDao.InsertarCliente(Id, Nombre, Apellido, Edad, Direccion, Telefono, correo, idClases);
         }
 
-        public void EditarCliente(int idCliente, string Nombre, string Apellido, int Edad, string Direccion, string Telefono, string correo, int idDetalles)
+        public void EditarCliente(int idCliente, string Nombre, string Apellido, int Edad, string Direccion, string Telefono, string correo, int idClases)
         {
-            userDao.EditarCliente(idCliente, Nombre, Apellido, Edad, Direccion, Telefono, correo, idDetalles);
+            userDao.EditarCliente(idCliente, Nombre, Apellido, Edad, Direccion, Telefono, correo, idClases);
         }
 
         public void BorrarCliente(int idCliente)

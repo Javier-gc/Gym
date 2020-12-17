@@ -54,8 +54,6 @@
             this.txtBusqueda = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.gbDatosClases = new System.Windows.Forms.GroupBox();
-            this.txtIDregistro = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.txtHoraFin = new System.Windows.Forms.TextBox();
             this.txtHoraInicio = new System.Windows.Forms.TextBox();
             this.txtDia = new System.Windows.Forms.TextBox();
@@ -308,8 +306,6 @@
             // 
             // gbDatosClases
             // 
-            this.gbDatosClases.Controls.Add(this.txtIDregistro);
-            this.gbDatosClases.Controls.Add(this.label10);
             this.gbDatosClases.Controls.Add(this.txtHoraFin);
             this.gbDatosClases.Controls.Add(this.txtHoraInicio);
             this.gbDatosClases.Controls.Add(this.txtDia);
@@ -326,26 +322,6 @@
             this.gbDatosClases.TabIndex = 6;
             this.gbDatosClases.TabStop = false;
             this.gbDatosClases.Text = "Datos de las Clases";
-            // 
-            // txtIDregistro
-            // 
-            this.txtIDregistro.Location = new System.Drawing.Point(160, 202);
-            this.txtIDregistro.Margin = new System.Windows.Forms.Padding(4);
-            this.txtIDregistro.MaxLength = 20;
-            this.txtIDregistro.Name = "txtIDregistro";
-            this.txtIDregistro.Size = new System.Drawing.Size(483, 32);
-            this.txtIDregistro.TabIndex = 10;
-            this.txtIDregistro.TextChanged += new System.EventHandler(this.txtIDregistro_TextChanged);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(48, 206);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(98, 26);
-            this.label10.TabIndex = 9;
-            this.label10.Text = "id Registro:";
             // 
             // txtHoraFin
             // 
@@ -478,8 +454,6 @@
         private System.Windows.Forms.TextBox txtBusqueda;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox gbDatosClases;
-        private System.Windows.Forms.TextBox txtIDregistro;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtHoraFin;
         private System.Windows.Forms.TextBox txtHoraInicio;
         private System.Windows.Forms.TextBox txtDia;

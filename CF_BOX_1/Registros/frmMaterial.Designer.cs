@@ -54,8 +54,6 @@
             this.txtBusqueda = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.gbDatosMaterial = new System.Windows.Forms.GroupBox();
-            this.txtIDregistro = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.txtStock = new System.Windows.Forms.TextBox();
             this.txtCantidad = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
@@ -307,8 +305,6 @@
             // 
             // gbDatosMaterial
             // 
-            this.gbDatosMaterial.Controls.Add(this.txtIDregistro);
-            this.gbDatosMaterial.Controls.Add(this.label10);
             this.gbDatosMaterial.Controls.Add(this.txtStock);
             this.gbDatosMaterial.Controls.Add(this.txtCantidad);
             this.gbDatosMaterial.Controls.Add(this.txtNombre);
@@ -326,31 +322,11 @@
             this.gbDatosMaterial.TabStop = false;
             this.gbDatosMaterial.Text = "Datos del Material";
             // 
-            // txtIDregistro
-            // 
-            this.txtIDregistro.Location = new System.Drawing.Point(127, 172);
-            this.txtIDregistro.Margin = new System.Windows.Forms.Padding(4);
-            this.txtIDregistro.MaxLength = 70;
-            this.txtIDregistro.Name = "txtIDregistro";
-            this.txtIDregistro.Size = new System.Drawing.Size(517, 32);
-            this.txtIDregistro.TabIndex = 10;
-            this.txtIDregistro.TextChanged += new System.EventHandler(this.txtIDregistro_TextChanged);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(15, 176);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(98, 26);
-            this.label10.TabIndex = 9;
-            this.label10.Text = "id Registro:";
-            // 
             // txtStock
             // 
             this.txtStock.Location = new System.Drawing.Point(127, 130);
             this.txtStock.Margin = new System.Windows.Forms.Padding(4);
-            this.txtStock.MaxLength = 70;
+            this.txtStock.MaxLength = 4;
             this.txtStock.Name = "txtStock";
             this.txtStock.Size = new System.Drawing.Size(517, 32);
             this.txtStock.TabIndex = 4;
@@ -358,9 +334,10 @@
             // 
             // txtCantidad
             // 
+            this.txtCantidad.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.txtCantidad.Location = new System.Drawing.Point(127, 87);
             this.txtCantidad.Margin = new System.Windows.Forms.Padding(4);
-            this.txtCantidad.MaxLength = 70;
+            this.txtCantidad.MaxLength = 4;
             this.txtCantidad.Name = "txtCantidad";
             this.txtCantidad.Size = new System.Drawing.Size(517, 32);
             this.txtCantidad.TabIndex = 3;
@@ -462,8 +439,6 @@
         private System.Windows.Forms.TextBox txtBusqueda;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox gbDatosMaterial;
-        private System.Windows.Forms.TextBox txtIDregistro;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtStock;
         private System.Windows.Forms.TextBox txtCantidad;
         private System.Windows.Forms.TextBox txtNombre;

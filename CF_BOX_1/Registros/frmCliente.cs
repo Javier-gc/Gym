@@ -21,7 +21,7 @@
 
             EstablecerEstado(false);
 
-            lblidRegistro.Text = Convert.ToString(detallesCache.idDetalles+1);
+            lblidRegistro.Text = Convert.ToString(userCache.userID);
         }
 
         private void EstablecerEstado(bool v)
@@ -108,12 +108,66 @@
                 return;
             }
 
+
             if (txtApellido.Text.Trim() == String.Empty)
             {
-                MessageBox.Show("Debes de introducir un apellido", "Warning", MessageBoxButtons.OK);
+                MessageBox.Show("Debes de introducir un Apellido", "Warning", MessageBoxButtons.OK);
                 txtApellido.Focus();
                 return;
             }
+
+            if (txtEdad.Text.Trim() == String.Empty)
+            {
+                MessageBox.Show("Debes de introducir un Edad", "Warning", MessageBoxButtons.OK);
+                txtEdad.Focus();
+                return;
+            }
+
+            if (txtDireccion.Text.Trim() == String.Empty)
+            {
+                MessageBox.Show("Debes de introducir una dirección", "Warning", MessageBoxButtons.OK);
+                txtDireccion.Focus();
+                return;
+            }
+
+            if (txtTelefono.Text.Trim() == String.Empty)
+            {
+                MessageBox.Show("Debes de introducir un telefono", "Warning", MessageBoxButtons.OK);
+                txtTelefono.Focus();
+                return;
+            }
+
+            if (ComprobarFormatoEmail(txtCorreo.Text) == false)
+            {
+                MessageBox.Show("Debes de introducir un Correo Valido", "Warning", MessageBoxButtons.OK);
+                txtCorreo.Focus();
+                return;
+            }
+
+            if (txtIDetalles.Text.Trim() == String.Empty)
+            {
+                MessageBox.Show("Debes de introducir una clase", "Warning", MessageBoxButtons.OK);
+                txtIDetalles.Focus();
+                return;
+            }
+            else
+            {
+                UsuarioModel user = new UsuarioModel();
+                var validclase = user.clases(txtIDetalles.Text);
+                if (validclase == false)
+                {
+                    MessageBox.Show("La clase no existe");
+                    //    txtIDetalles.Text = txtIDetalles.Text.Remove(txtIDetalles.Text.Length - 1);
+
+                    txtIDetalles.Text = String.Empty;
+
+                    txtIDetalles.Focus();
+                    return;
+
+                }
+            }
+
+           
 
             if (PageAction == "ADD")
             {
@@ -131,7 +185,7 @@
                     ID = int.Parse(dgCliente[0, dgCliente.CurrentRow.Index].Value.ToString());
 
                     UsuarioModel usuarioModel = new UsuarioModel();
-                    usuarioModel.EditarCliente(ID, txtNombre.Text, txtApellido.Text, Convert.ToInt32(txtEdad.Text), txtDireccion.Text,txtTelefono.Text, txtCorreo.Text, Convert.ToInt32(txtIDetalles.Text));
+                    usuarioModel.EditarCliente(ID, txtNombre.Text, txtApellido.Text, Convert.ToInt32(txtEdad.Text), txtDireccion.Text, txtTelefono.Text, txtCorreo.Text, Convert.ToInt32(txtIDetalles.Text));
                     this.clienteTableAdapter.Fill(this.dsClientes.Cliente);
                     EstablecerEstado(false);
                 }
@@ -182,6 +236,47 @@
                 MessageBox.Show("Ingresa solo números");
                 txtIDetalles.Text = txtIDetalles.Text.Remove(txtIDetalles.Text.Length - 1);
             }
+
+        
+         
+        }
+
+
+        public static bool ComprobarFormatoEmail(string email)
+        {
+            String sFormato;
+            sFormato = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+            if (System.Text.RegularExpressions.Regex.IsMatch(email, sFormato))
+            {
+                if (System.Text.RegularExpressions.Regex.Replace(email, sFormato, String.Empty).Length == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+    private void txtCorreo_TextChanged(object sender, EventArgs e)
+        {
+      
+            
+        }
+
+        private void lblidRegistro_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

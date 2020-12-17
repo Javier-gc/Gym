@@ -53,13 +53,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.personalTableAdapter = new CF_BOX_1.DataSets.dsPersonalTableAdapters.PersonalTableAdapter();
             this.gbBusqueda = new System.Windows.Forms.GroupBox();
-            this.lblidRegistro = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.txtBusquedaPuesto = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.gbDatosPersonal = new System.Windows.Forms.GroupBox();
-            this.txtIDregistro = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.txtPuesto = new System.Windows.Forms.TextBox();
             this.txtCorreo = new System.Windows.Forms.TextBox();
             this.txtTelefono = new System.Windows.Forms.TextBox();
@@ -74,6 +71,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.lblidRegistro = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgPersonal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.personalBindingSource)).BeginInit();
@@ -326,17 +324,6 @@
             this.gbBusqueda.TabStop = false;
             this.gbBusqueda.Text = "Busqueda";
             // 
-            // lblidRegistro
-            // 
-            this.lblidRegistro.AutoSize = true;
-            this.lblidRegistro.Font = new System.Drawing.Font("Haettenschweiler", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblidRegistro.Location = new System.Drawing.Point(124, 164);
-            this.lblidRegistro.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblidRegistro.Name = "lblidRegistro";
-            this.lblidRegistro.Size = new System.Drawing.Size(159, 42);
-            this.lblidRegistro.TabIndex = 3;
-            this.lblidRegistro.Text = "ID Registro:";
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -368,8 +355,6 @@
             // 
             // gbDatosPersonal
             // 
-            this.gbDatosPersonal.Controls.Add(this.txtIDregistro);
-            this.gbDatosPersonal.Controls.Add(this.label10);
             this.gbDatosPersonal.Controls.Add(this.txtPuesto);
             this.gbDatosPersonal.Controls.Add(this.txtCorreo);
             this.gbDatosPersonal.Controls.Add(this.txtTelefono);
@@ -394,26 +379,6 @@
             this.gbDatosPersonal.TabIndex = 4;
             this.gbDatosPersonal.TabStop = false;
             this.gbDatosPersonal.Text = "Datos del Personal";
-            // 
-            // txtIDregistro
-            // 
-            this.txtIDregistro.Location = new System.Drawing.Point(127, 356);
-            this.txtIDregistro.Margin = new System.Windows.Forms.Padding(4);
-            this.txtIDregistro.MaxLength = 70;
-            this.txtIDregistro.Name = "txtIDregistro";
-            this.txtIDregistro.Size = new System.Drawing.Size(517, 32);
-            this.txtIDregistro.TabIndex = 10;
-            this.txtIDregistro.TextChanged += new System.EventHandler(this.txtIDregistro_TextChanged);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(15, 359);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(98, 26);
-            this.label10.TabIndex = 9;
-            this.label10.Text = "id Registro:";
             // 
             // txtPuesto
             // 
@@ -550,6 +515,18 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Nombre:";
             // 
+            // lblidRegistro
+            // 
+            this.lblidRegistro.AutoSize = true;
+            this.lblidRegistro.Font = new System.Drawing.Font("Haettenschweiler", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblidRegistro.Location = new System.Drawing.Point(124, 164);
+            this.lblidRegistro.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblidRegistro.Name = "lblidRegistro";
+            this.lblidRegistro.Size = new System.Drawing.Size(40, 42);
+            this.lblidRegistro.TabIndex = 3;
+            this.lblidRegistro.Text = "ID";
+            this.lblidRegistro.Click += new System.EventHandler(this.lblidRegistro_Click);
+            // 
             // frmPersonal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -623,9 +600,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtIDregistro;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label lblidRegistro;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label lblidRegistro;
     }
 }

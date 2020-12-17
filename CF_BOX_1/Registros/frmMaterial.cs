@@ -21,7 +21,7 @@
 
             EstablecerEstado(false);
 
-            lblidRegistro.Text = Convert.ToString(registroCache.idRegistro + 1);
+            lblidRegistro.Text = Convert.ToString(userCache.userID);
         }
 
         private void EstablecerEstado(bool v)
@@ -61,7 +61,7 @@
             txtNombre.Text = String.Empty;
             txtCantidad.Text = String.Empty;
             txtStock.Text = String.Empty;
-            txtIDregistro.Text = String.Empty;
+        
         }
 
         private void ToolStripModificar_Click(object sender, EventArgs e)
@@ -77,7 +77,7 @@
         {
             if (dgMaterial.CurrentCell == null)
             {
-                MessageBox.Show("No hay personal en el sistema", "Warning", MessageBoxButtons.OK);
+                MessageBox.Show("No hay material en el sistema", "Warning", MessageBoxButtons.OK);
                 EstablecerEstado(false);
                 return;
             }
@@ -85,7 +85,7 @@
             txtNombre.Text = dgMaterial[1, dgMaterial.CurrentRow.Index].Value.ToString();
             txtCantidad.Text = dgMaterial[2, dgMaterial.CurrentRow.Index].Value.ToString();
             txtStock.Text = dgMaterial[3, dgMaterial.CurrentRow.Index].Value.ToString();
-            txtIDregistro.Text = dgMaterial[4, dgMaterial.CurrentRow.Index].Value.ToString();
+           // txtIDregistro.Text = dgMaterial[4, dgMaterial.CurrentRow.Index].Value.ToString();
         }
 
         private void ToolStripCancelar_Click(object sender, EventArgs e)
@@ -110,10 +110,24 @@
                 return;
             }
 
+            if(Convert.ToInt32(txtStock.Text) < Convert.ToInt32(txtCantidad.Text))
+            {
+                MessageBox.Show("No puedes poner más material que sobrepase el Stock", "Warning", MessageBoxButtons.OK);
+                txtCantidad.Focus();
+                return;
+            }
+
+            if (txtStock.Text.Trim() == String.Empty)
+            {
+                MessageBox.Show("Debes de introducir el Stock", "Warning", MessageBoxButtons.OK);
+                txtCantidad.Focus();
+                return;
+            }
+
             if (PageAction == "ADD")
             {
                 UsuarioModel usuarioModel = new UsuarioModel();
-                usuarioModel.InsertarMaterial(txtNombre.Text, Convert.ToInt32(txtCantidad.Text), Convert.ToInt32(txtStock.Text), Convert.ToInt32(txtIDregistro.Text));
+                usuarioModel.InsertarMaterial(txtNombre.Text, Convert.ToInt32(txtCantidad.Text), Convert.ToInt32(txtStock.Text), Convert.ToInt32(userCache.userID));
                 this.materialTableAdapter.Fill(this.dsMaterial.Material);
                 EstablecerEstado(false);
             }
@@ -121,13 +135,7 @@
             {
                 if (PageAction == "EDIT")
                 {
-                    if (int.Parse(dgMaterial[0, dgMaterial.CurrentRow.Index].Value.ToString()) == 1)
-                    {
-                        MessageBox.Show("Esté personal no se puede editar", "Warning", MessageBoxButtons.OK);
-                        ClearField();
-                        EstablecerEstado(false);
-                        return;
-                    }
+                 
 
                    // ID = Convert.ToInt32(dgUsuarios[0, dgUsuarios.CurrentRow.Index].Value.ToString());
                    // usuarioModel.editarUsuario(ID, Tipousuario, txtNombre.Text.ToUpper(), txtAPaterno.Text.ToUpper(), txtAMaterno.Text.ToUpper(), txtUsuario.Text, txtPassword.Text);
@@ -137,7 +145,7 @@
 
                     ID = Convert.ToInt32(dgMaterial[0, dgMaterial.CurrentRow.Index].Value.ToString());
                     UsuarioModel usuarioModel = new UsuarioModel();
-                    usuarioModel.EditarMaterial(ID, txtNombre.Text, Convert.ToInt32(txtCantidad.Text), Convert.ToInt32(txtStock.Text), Convert.ToInt32(txtIDregistro.Text));
+                    usuarioModel.EditarMaterial(ID, txtNombre.Text, Convert.ToInt32(txtCantidad.Text), Convert.ToInt32(txtStock.Text), Convert.ToInt32(userCache.userID));
                     this.materialTableAdapter.Fill(this.dsMaterial.Material);
                     EstablecerEstado(false);
                 }
@@ -183,13 +191,6 @@
             }
         }
 
-        private void txtIDregistro_TextChanged(object sender, EventArgs e)
-        {
-            if (System.Text.RegularExpressions.Regex.IsMatch(txtIDregistro.Text, "[^0-9]"))
-            {
-                MessageBox.Show("Ingresa solo números");
-                txtIDregistro.Text = txtIDregistro.Text.Remove(txtIDregistro.Text.Length - 1);
-            }
-        }
+      
     }
 }

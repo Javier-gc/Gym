@@ -33,6 +33,7 @@
                             userCache.userID = reader.GetString(1);
                             userCache.loginName = reader.GetString(2);
                             userCache.PassW = reader.GetString(3);
+                        
                         }
                         return true;
                     }
@@ -43,6 +44,45 @@
                 }
             }
         }
+
+        public bool clases(string idclases)
+        {
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+
+                using (var command = new SqlCommand())
+                {
+                    command.Connection = connection;
+                    command.CommandText = "Select * From Clases Where idClases = @idclases";
+
+                    if(idclases != null)
+                    {
+                        command.Parameters.AddWithValue("@idclases", idclases);
+                    }
+                  
+
+                    command.CommandType = CommandType.Text;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            clasesCache.idClases = reader.GetInt32(0);
+
+                        }
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+
 
         public void InsertarPersonal(int idPersonal, string Nombre, string Apellido, int Edad, string Direccion, string Telefono, string correo, string puesto, int idRegistro)
         {
@@ -102,6 +142,10 @@
             }
         }
 
+ 
+
+
+
         public void EditarClases(int idClases, string Dia, string HoraInicio, string HoraFinaliza, int idRegistro)
         {
             using (var connection = GetConnection())
@@ -124,6 +168,10 @@
                 using (var command = new SqlCommand())
                 {
                     command.Connection = connection;
+
+                    command.CommandText = "UPDATE Cliente SET idClases = " + 0 + " WHERE idClases=" + idClases;
+                    command.ExecuteNonQuery();
+
                     command.CommandText = "Delete FROM Clases WHERE idClases=" + idClases + "";
                     command.ExecuteNonQuery();
                 }
@@ -176,7 +224,7 @@
 
         ////////////////////////////   CLIENTE   /////////////////////////////////////
 
-        public void InsertarCliente(int idCliente, string Nombre, string Apellido, int Edad, string Direccion, string Telefono, string correo, int idDetalles)
+        public void InsertarCliente(int idCliente, string Nombre, string Apellido, int Edad, string Direccion, string Telefono, string correo, int idClases)
         {
             using (var connection = GetConnection())
             {
@@ -184,13 +232,13 @@
                 using (var command = new SqlCommand())
                 {
                     command.Connection = connection;
-                    command.CommandText = "Insert Into Cliente VALUES (" + idCliente + ",'" + Nombre + "','" + Apellido + "'," + Edad + ",'" + Direccion + "','" + Telefono + "','" + correo + "', " + idDetalles + ")";
+                    command.CommandText = "Insert Into Cliente VALUES (" + idCliente + ",'" + Nombre + "','" + Apellido + "'," + Edad + ",'" + Direccion + "','" + Telefono + "','" + correo + "', " + idClases + ")";
                     command.ExecuteNonQuery();
                 }
             }
         }
 
-        public void EditarCliente(int idCliente, string Nombre, string Apellido, int Edad, string Direccion, string Telefono, string correo, int idDetalles)
+        public void EditarCliente(int idCliente, string Nombre, string Apellido, int Edad, string Direccion, string Telefono, string correo, int idClases)
         {
             using (var connection = GetConnection())
             {
@@ -198,7 +246,7 @@
                 using (var command = new SqlCommand())
                 {
                     command.Connection = connection;
-                    command.CommandText = "Update Cliente set idCliente= " + idCliente + ", Nombre='" + Nombre + "', Apellido='" + Apellido + "', Edad=" + Edad + ", Direccion='" + Direccion + "', Telefono='" + Telefono + "', correo='" + correo + "', idDetalles=" + idDetalles + " WHERE idCliente = " + idCliente ;
+                    command.CommandText = "Update Cliente set idCliente= " + idCliente + ", Nombre='" + Nombre + "', Apellido='" + Apellido + "', Edad=" + Edad + ", Direccion='" + Direccion + "', Telefono='" + Telefono + "', correo='" + correo + "', idClases=" + idClases + " WHERE idCliente = " + idCliente ;
                     command.ExecuteNonQuery();
                 }
             }
